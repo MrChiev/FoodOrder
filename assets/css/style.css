@@ -1,0 +1,464 @@
+/* =========================================================
+   FoodOrder — Design System
+   A clean, professional look for a Cambodian food-ordering
+   platform. Ledger-style cards, hairline rules, and a
+   serif/sans/mono type system built for readable ordering
+   and back-office screens.
+   ========================================================= */
+
+:root,
+[data-bs-theme="dark"] {
+  /* --- Palette --- */
+  --ink:          #10141A;  /* page background */
+  --surface:      #171D25;  /* card / panel background */
+  --surface-2:    #1F2732;  /* raised / hover surface */
+  --line:         #2B3440;  /* hairline borders */
+  --text:         #E8ECF1;  /* primary text */
+  --text-muted:   #8B96A3;  /* secondary text */
+
+  --jade:         #2FA88C;  /* brand accent — the one accent color, used deliberately */
+  --jade-dark:    #23796A;
+  --jade-subtle:  rgba(47, 168, 140, 0.14);
+
+  --gold:         #C89B3C;  /* reserved strictly for money + pending-state semantics */
+  --gold-subtle:  rgba(200, 155, 60, 0.16);
+
+  --red:          #C1524A;
+  --red-subtle:   rgba(193, 82, 74, 0.16);
+
+  /* --- Bootstrap variable overrides (cascades into all utilities) --- */
+  --bs-body-bg: var(--ink);
+  --bs-body-color: var(--text);
+  --bs-body-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --bs-emphasis-color: var(--text);
+  --bs-secondary-color: var(--text-muted);
+  --bs-tertiary-bg: var(--surface-2);
+  --bs-border-color: var(--line);
+  --bs-border-radius: .5rem;
+  --bs-border-radius-sm: .375rem;
+  --bs-border-radius-lg: .75rem;
+
+  --bs-primary: var(--jade);
+  --bs-primary-rgb: 47, 156, 134;
+  --bs-link-color: var(--jade);
+  --bs-link-color-rgb: 47, 156, 134;
+  --bs-link-hover-color: #3FB59D;
+  --bs-link-hover-color-rgb: 63, 181, 157;
+
+  --bs-success: #3FA772;
+  --bs-success-rgb: 63, 167, 114;
+  --bs-warning: var(--gold);
+  --bs-warning-rgb: 200, 155, 60;
+  --bs-danger: var(--red);
+  --bs-danger-rgb: 193, 82, 74;
+  --bs-info: #3E8FB0;
+  --bs-info-rgb: 62, 143, 176;
+  --bs-secondary: #4A5568;
+  --bs-secondary-rgb: 74, 85, 104;
+
+  --bs-card-bg: var(--surface);
+  --bs-card-border-color: var(--line);
+}
+
+html, body {
+  background-color: var(--ink);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* --- Scrollbar: slim, palette-matched, instead of the bulky OS default --- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--line);
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--jade-dark);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* --- Brand mark: small stamped square, ticket-punch style --- */
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid var(--jade);
+  border-radius: 6px;
+  color: var(--jade);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+::selection {
+  background: var(--jade-subtle);
+  color: var(--text);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6,
+.card-title, .navbar-brand, .display-5 {
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 { margin-bottom: 1.25rem; }
+
+.display-5 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.small, small, .text-muted, .form-text { color: var(--text-muted) !important; }
+
+/* Monospace treatment for prices — set globally via formatPrice() output */
+.money {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Dashboard stat figures read like a ledger */
+.fs-3.fw-bold {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+/* --- Navbar --- */
+.navbar {
+  background-color: var(--surface) !important;
+  border-bottom: 1px solid var(--line);
+  padding-top: .85rem;
+  padding-bottom: .85rem;
+}
+
+.navbar-brand {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.navbar-nav .nav-link {
+  color: var(--text-muted) !important;
+  font-weight: 500;
+  font-size: .925rem;
+  padding-left: .85rem !important;
+  padding-right: .85rem !important;
+  transition: color .15s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--text) !important;
+}
+
+/* --- Footer --- */
+footer {
+  background-color: var(--surface) !important;
+  border-top: 1px solid var(--line);
+  color: var(--text-muted) !important;
+}
+
+footer p {
+  font-size: .85rem;
+  letter-spacing: .01em;
+}
+
+footer p:first-child {
+  font-weight: 600;
+  color: var(--text) !important;
+}
+
+/* --- Cards --- */
+.card {
+  border-width: 1px;
+  box-shadow: none;
+}
+
+.card.shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3) !important;
+}
+
+/* Order tickets: a crisp double rule nods to a printed kitchen ticket */
+.card-ticket {
+  position: relative;
+  border-top: none;
+}
+
+.card-ticket::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background-color: var(--jade);
+  opacity: .55;
+}
+
+.order-no {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: .95rem;
+  letter-spacing: -0.01em;
+}
+
+/* Hero banner: styled like a printed order ticket, torn free at the top,
+   to carry the same receipt/ledger language as .card-ticket elsewhere */
+.hero-ticket {
+  position: relative;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-top: none;
+  padding: 3.5rem 2rem 2.75rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-ticket::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--jade);
+  opacity: .55;
+}
+
+/* Perforation dots along the torn edge */
+.hero-ticket::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-image: radial-gradient(circle, var(--ink) 1.5px, transparent 1.5px);
+  background-size: 14px 1px;
+  background-position: 7px 0;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: .78rem;
+  color: var(--jade);
+  margin-bottom: 1rem;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background-color: var(--jade);
+  opacity: .5;
+}
+
+.hero-ticket h1 {
+  margin-bottom: .75rem;
+}
+
+.hero-ticket .lead {
+  max-width: 34rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-ticket .hero-actions {
+  margin-top: 1.75rem;
+}
+
+/* --- Buttons: quiet, precise, slightly tracked-out labels --- */
+.btn {
+  font-weight: 600;
+  font-size: .9rem;
+  letter-spacing: .01em;
+  border-radius: var(--bs-border-radius-sm);
+}
+
+.btn-lg {
+  padding: .65rem 1.5rem;
+}
+
+.btn-primary {
+  --bs-btn-color: #0B1410;
+  --bs-btn-hover-color: #0B1410;
+  --bs-btn-active-color: #0B1410;
+}
+
+/* --- Badges --- */
+.badge {
+  font-weight: 600;
+  font-size: .72rem;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  padding: .4em .65em;
+}
+
+.status-badge-pending   { background-color: var(--gold-subtle); color: var(--gold); }
+.status-badge-preparing { background-color: rgba(62, 143, 176, .18); color: #6FBBDA; }
+.status-badge-ready     { background-color: var(--jade-subtle); color: #4FC7AE; }
+.status-badge-delivered { background-color: rgba(139, 150, 163, .18); color: var(--text-muted); }
+
+/* Category label on menu cards — same restrained language as status badges,
+   instead of Bootstrap's flat gray bg-secondary */
+.badge-category {
+  background-color: var(--jade-subtle);
+  color: #4FC7AE;
+  font-weight: 600;
+}
+
+/* Neutral/inactive state badge (deactivated users, hidden items, sold counts) */
+.badge-neutral {
+  background-color: var(--surface-2);
+  color: var(--text-muted);
+  font-weight: 600;
+  border: 1px solid var(--line);
+}
+
+/* Emphasis badge for the current admin's own row */
+.badge-emphasis {
+  background-color: var(--jade-subtle);
+  color: var(--jade);
+  font-weight: 600;
+}
+
+/* --- Tables --- */
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  --bs-table-border-color: var(--line);
+}
+
+.table > thead {
+  border-bottom: 1px solid var(--line);
+}
+
+.table > thead th {
+  font-family: 'Inter', sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+  border-bottom-width: 1px;
+}
+
+/* --- Forms --- */
+.form-label {
+  font-weight: 600;
+  font-size: .875rem;
+  margin-bottom: .4rem;
+}
+
+.form-control, .form-select {
+  background-color: var(--surface);
+  border-color: var(--line);
+  color: var(--text);
+  padding: .6rem .85rem;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: var(--surface);
+  color: var(--text);
+  border-color: var(--jade);
+  box-shadow: 0 0 0 .2rem var(--jade-subtle);
+}
+
+.form-control::placeholder { color: var(--text-muted); opacity: .7; }
+
+.input-group-text {
+  background-color: var(--surface-2);
+  border-color: var(--line);
+  color: var(--text-muted);
+}
+
+/* Inline role select in Manage Users — fixed width so the column
+   reads as a uniform control instead of ragged, text-sized boxes */
+select[name="role"].form-select-sm {
+  min-width: 6.5rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  padding-left: .5rem;
+  font-size: .825rem;
+}
+
+/* --- Menu item cards: styled like a printed order ticket --- */
+.menu-card {
+  overflow: hidden;
+  transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+
+.menu-card:hover {
+  border-color: var(--jade);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-card { transition: border-color .15s ease; }
+  .menu-card:hover { transform: none; }
+}
+
+.menu-card img {
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--line);
+}
+
+.menu-card .card-body {
+  position: relative;
+}
+
+.menu-card .money {
+  font-size: 1.05rem;
+  color: var(--gold);
+}
+
+/* --- Dashboard stat cards: quiet ledger tone instead of loud fills --- */
+.card.bg-success,
+.card.bg-primary {
+  background-color: var(--surface) !important;
+  border-left: 3px solid var(--jade);
+}
+
+.card.bg-success .small,
+.card.bg-primary .small {
+  color: var(--text-muted) !important;
+}
+
+.card.bg-success .fs-3,
+.card.bg-primary .fs-3 {
+  color: var(--text) !important;
+}
+
+.card.bg-success { border-left-color: var(--jade); }
+.card.bg-primary { border-left-color: var(--jade); }
